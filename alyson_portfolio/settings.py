@@ -16,7 +16,9 @@ import environ
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True),
-    MySecretKey=(str, True)
+    MySecretKey=(str, True),
+    dbname=(str, True),
+    dbpasword=(str, True)
 )
 # reading .env file
 environ.Env.read_env()
@@ -83,9 +85,9 @@ WSGI_APPLICATION = 'alyson_portfolio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'portfoliodb',
+        'NAME': env('dbname'),
         'USER': 'postgres',
-        'PASSWORD': 'whovian12345',
+        'PASSWORD': env('dbpassword'),
         'HOST': 'localhost',
         'PORT': '5433',
     }
